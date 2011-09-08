@@ -2,13 +2,16 @@
 call pathogen#infect()
 call pathogen#helptags()
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-"syntax on
-"colorscheme desert256
-"colorscheme wombat256
-"colorscheme desert
-"colorscheme solarized
+set nocompatible
+
+" Set title of window according to filename.
+set title
+" Set line numbering on by default
+set number
+" Show line and column position of cursor, with percentage.
+set ruler
+
+
 
 " Set leader to comma.
 let mapleader = ","
@@ -28,35 +31,22 @@ syntax enable
 
 
 set expandtab
-set shiftwidth=4
 set softtabstop=4
 set smarttab
-set wrap linebreak textwidth=0
+set shiftwidth=4
+set shiftround
 set showtabline=1
-set number
+
+set wrap linebreak textwidth=0
 
 
 if has('gui_running')
     set guifont=DejaVu\ Sans\ Mono\:h14 
     colorscheme desert256
-    "set guifont=Menlo:h14
-    "set background=light
-    "colorscheme solarized
 else
     colorscheme default
 endif
 
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
-" Uncomment the following to have Vim load indentation rules according to the
-" detected filetype. Per default Debian Vim only load filetype specific
-" plugins.
-if has("autocmd")
-  filetype indent on
-endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -98,8 +88,9 @@ augroup END
 " If for aesthetic reasons you want a left margin in writing text...
 function! GutterLeft()
   set number
-  highlight LineNr ctermfg=Black
+  highlight LineNr ctermfg=LightGray
 endfunction
+
 
 " Use space and backspace for quick navigation forward/back.
 noremap <Space> <PageDown>
@@ -109,10 +100,6 @@ noremap <BS> <PageUp>
 " No audible bell.
 set visualbell
 
-" Show line and column position of cursor, with percentage.
-set ruler
-
-set nocompatible
 
 " Encoding and line breaks.
 set encoding=utf-8
@@ -123,7 +110,7 @@ set grepprg=grep\ -nH\ $*
 " Completion for file open etc.
 set wildmenu
 set wildmode=list:longest
-set wildignore+=*.log,*.pdf,*.swp,*.o,*.hi,*.py[co],*~
+set wildignore+=*.git,*.log,*.pdf,*.swp,*.o,*.hi,*.py[co],*~
 
 " Flexible backspace: allow backspacing over autoindent, line breaks, start of
 " insert.
@@ -138,6 +125,8 @@ map <C-p> :bp<cr>
 " Type part of bufname after prompt.
 nmap zl :ls!<CR>:buf 
 
+
+" Quickly create a new tab
 map <leader>t <Esc>:tabnew<CR>
 
 
@@ -145,10 +134,34 @@ map <leader>t <Esc>:tabnew<CR>
 nmap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
-map <leader>e :e! ~/.vimrc<cr>
+" map <leader>e :e! ~/.vimrc<cr>
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 
+" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
 
+" Directories for swp files
+set backupdir=~/.backuptmp
+set directory=~/.backuptmp
+
+
+function! s:setupWrapping()
+  set wrap
+  set wrapmargin=2
+  set textwidth=72
+endfunction
+
+function! s:setupMarkup()
+  set ft=markdown
+  call s:setupWrapping()
+endfunction
+
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
