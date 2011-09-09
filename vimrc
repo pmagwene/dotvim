@@ -93,7 +93,7 @@ augroup END
 " If for aesthetic reasons you want a left margin in writing text...
 function! GutterLeft()
   set number
-  highlight LineNr ctermfg=LightGray
+  highlight LineNr ctermfg=Black
 endfunction
 
 
@@ -173,3 +173,11 @@ endfunction
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+" empty tex files default to latex
+let g:tex_flavor='latex'
+let g:Tex_ViewRule_ps = 'Preview'
+let g:Tex_ViewRule_pdf = 'Skim'
+let g:Tex_CompileRule_pdf = 'xelatex -shell-escape -synctex=1 --interaction=nonstopmode $*'
+let g:Tex_DefaultTargetFormat = 'pdf'
+
