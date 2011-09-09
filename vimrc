@@ -10,11 +10,15 @@ set title
 set number
 " Show line and column position of cursor, with percentage.
 set ruler
-
+" Status line
+set laststatus=2
+" Remove splash screen
+set shortmess+=I
 
 
 " Set leader to comma.
 let mapleader = ","
+
 
 " Don't redraw screen while executing macros.
 set nolazyredraw
@@ -145,6 +149,8 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+" get rid of search highlighting by hitting return
+nnoremap <CR> :noh<CR><CR>
 
 " Directories for swp files
 set backupdir=~/.backuptmp
