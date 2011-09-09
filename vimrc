@@ -75,7 +75,8 @@ augroup CPT
  au BufWritePre *.cpt '[,']!/usr/local/bin/ccrypt -e -E vimpass
  au BufWritePost *.cpt u
  au BufWritePost *.cpt set nobin
- map <F2> iname:<CR>username:<CR>password:<CR>---<CR><Esc>kkkk$a
+ au BufNewFile *.cpt let $vimpass = inputsecret("ccrypt password for this file: ")
+ au BufRead,BufNewFile *.cpt set ft=cpt 
 augroup END
 
 
