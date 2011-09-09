@@ -159,6 +159,7 @@ endfunction
 
 function! s:setupMarkup()
   set ft=markdown
+  colorscheme inkpot
   call s:setupWrapping()
 endfunction
 
