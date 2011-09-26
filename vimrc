@@ -181,3 +181,5 @@ let g:Tex_ViewRule_pdf = 'Skim'
 let g:Tex_CompileRule_pdf = 'xelatex -shell-escape -synctex=1 --interaction=nonstopmode $*'
 let g:Tex_DefaultTargetFormat = 'pdf'
 
+" For Asymptote files
+au BufRead,BufNewFile *.asy setf asy
