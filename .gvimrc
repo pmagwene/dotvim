@@ -1,0 +1,1 @@
+/Users/pmagwene/gits/github/dotvim/gvimrc.small

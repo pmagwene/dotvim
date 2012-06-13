@@ -1,0 +1,64 @@
+
+set nocompatible
+" Font
+if has('gui_running')
+    set guifont=Panic\ Sans\:h16 
+endif
+
+" Color
+if &t_Co > 2 || has("gui_running")
+  colorscheme hemisu
+  set background=dark
+endif
+
+" Set title of window according to filename.
+set title
+
+" Set leader to comma.
+let mapleader = ","
+
+
+" The following are commented out as they cause vim to behave a lot
+" differently from regular Vi. They are highly recommended though.
+set showcmd        " Show (partial) command in status line.
+set showmatch        " Show matching brackets.
+set ignorecase        " Do case insensitive matching
+set smartcase        " Do smart case matching
+set incsearch        " Incremental search
+set autowrite        " Automatically save before commands like :next and :make
+set hidden             " Hide buffers when they are abandoned
+set mouse=a        " Enable mouse usage (all modes) in terminals
+
+
+" Set line numbering on by default
+set number
+
+" Show line and column position of cursor, with percentage.
+set ruler
+
+" Status line
+set laststatus=2
+
+" Remove splash screen
+set shortmess+=I
+
+
+" Behave intelligently for type of file.
+filetype plugin indent on
+
+" Syntax highlighting.
+function! SyntaxToggle()
+  execute "syntax" exists("g:syntax_on") ? "off" : "on"
+endfunction
+nmap <leader>s :call SyntaxToggle()<cr><C-l><cr>
+syntax enable
+
+
+
+
+set expandtab
+set softtabstop=4
+set smarttab
+set shiftwidth=4
+set shiftround
+set showtabline=1
