@@ -2,7 +2,7 @@
 set nocompatible
 " Font
 if has('gui_running')
-    set guifont=Panic\ Sans\:h16 
+    set guifont=Panic\ Sans\:h12 
 endif
 
 " Color
